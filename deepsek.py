@@ -8,7 +8,7 @@ async def generate_response(prompt, api_key):
 
     completion = await client.chat.completions.create(
         model="deepseek/deepseek-chat-v3-0324:free",
-        message=[
+        messages=[
             {
                 "role": "user",
                 "content": prompt
@@ -17,4 +17,6 @@ async def generate_response(prompt, api_key):
     )
     return completion.choices[0].message.content
 
-#generate_response()
+
+
+# generate_response()
