@@ -8,13 +8,13 @@ from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
 from aiogram.types import Message
-# from aiogram.client.session.aiohttp import AiohttpSession
+from aiogram.client.session.aiohttp import AiohttpSession
 from deepsek import generate_response
 
 load_dotenv()
 TOKEN = getenv("BOT_TOKEN")
 AI_TOKEN = getenv("AI_TOKEN")
-# session = AiohttpSession(proxy="http://proxy.server:3128")
+session = AiohttpSession(proxy="http://proxy.server:3128")
 dp = Dispatcher()
 
 
@@ -31,8 +31,8 @@ async def echo(message: Message) -> None:
 
 # Run the bot
 async def main() -> None:
-    bot = Bot(token=TOKEN)
-    # bot = Bot(token=TOKEN, session=session)
+    # bot = Bot(token=TOKEN)
+    bot = Bot(token=TOKEN, session=session)
     await dp.start_polling(bot)
 
 
