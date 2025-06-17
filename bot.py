@@ -1,7 +1,9 @@
 import asyncio
+import datetime
 import logging
 from http.client import responses
 from os import getenv
+from time import sleep
 
 from aiogram.enums import ParseMode
 from dotenv import load_dotenv
@@ -27,17 +29,15 @@ async def command_start_handler(message: Message) -> None:
 
 @dp.message()
 async def echo(message: Message) -> None:
-
     response = await generate_response(message.text, AI_TOKEN)
     await message.answer_sticker(sticker="CAACAgEAAxkBAANlaFDs4bqnTQxkqXdgRMYsZT8D1S0AAi0CAAKnIyFEPUAwye2DtLY2BA")
-    await bot.delete_message(message.chat.id, message.message_id+1)
     await message.answer(f"{response}", parse_mode="Markdown")
+    sleep(0.5)
+    await bot.delete_message(message.chat.id, message.message_id + 1)
 
 
 # Run the bot
 async def main() -> None:
-
-    bot = Bot(token=TOKEN, session=session)
     await dp.start_polling(bot)
 
 
