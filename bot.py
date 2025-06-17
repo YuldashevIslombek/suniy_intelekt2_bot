@@ -13,7 +13,7 @@ from deepsek import generate_response
 
 load_dotenv()
 TOKEN = getenv("BOT_TOKEN")
-# bot = Bot(token=TOKEN)
+bot = Bot(token=TOKEN)
 AI_TOKEN = getenv("AI_TOKEN")
 session = AiohttpSession(proxy="http://proxy.server:3128")
 dp = Dispatcher()
