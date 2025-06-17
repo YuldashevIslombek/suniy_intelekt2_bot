@@ -13,6 +13,7 @@ from deepsek import generate_response
 
 load_dotenv()
 TOKEN = getenv("BOT_TOKEN")
+# bot = Bot(token=TOKEN)
 AI_TOKEN = getenv("AI_TOKEN")
 session = AiohttpSession(proxy="http://proxy.server:3128")
 dp = Dispatcher()
@@ -25,13 +26,19 @@ async def command_start_handler(message: Message) -> None:
 
 @dp.message()
 async def echo(message: Message) -> None:
+    print(bot)
+    print(f"Message: {message.message_id+1}")
+    # sticker_id = message.sticker.file_id
     response = await generate_response(message.text, AI_TOKEN)
+    await message.answer_sticker(sticker="CAACAgEAAxkBAANlaFDs4bqnTQxkqXdgRMYsZT8D1S0AAi0CAAKnIyFEPUAwye2DtLY2BA")
+    await bot.delete_message(message.chat.id, message.message_id+1)
     await message.answer(f"{response}", parse_mode="Markdown")
+    # await message.answer(sticker_id)
 
 
 # Run the bot
 async def main() -> None:
-    # bot = Bot(token=TOKEN)
+
     bot = Bot(token=TOKEN, session=session)
     await dp.start_polling(bot)
 
