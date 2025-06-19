@@ -27,6 +27,10 @@ dp = Dispatcher()
 async def command_start_handler(message: Message) -> None:
         await message.answer("Assalomu alaykum! Botga xush kelibsiz. Sizga qanday yordam bera olaman!")
 
+@dp.message(Command("help"))
+async def _help(message: Message) -> None:
+        await message.answer("Savolingizni kiriting, men unga javob beraman!")
+
 @dp.message()
 async def echo(message: Message) -> None:
     response = await generate_response(message.text, AI_TOKEN)
